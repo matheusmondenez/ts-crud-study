@@ -1,4 +1,4 @@
-import fastify, { FastifyInstance, FastifyRequest, FastifyReply, FastifyListenOptions, FastifyError } from 'fastify'
+import fastify, { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import { userRoutes } from './routes/user.ts'
 import { contactRoutes } from './routes/contact.ts'
 

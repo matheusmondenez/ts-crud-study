@@ -2,13 +2,10 @@ import { prisma } from '../database/prisma.ts'
 import { IContact, IContactRepository, IContactCreateData } from '../interfaces/IContact.ts'
 
 class ContactRepository implements IContactRepository {
-  async create(data: IContactCreateData): Promise<IContact> {
-    const result = await prisma.contact.create({
-      data: {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        userId: data.userId,
+  async getAll(userId: string): Promise<IContact[]> {
+    const result = await prisma.contact.findMany({
+      where: {
+        userId,
       },
     })
 
@@ -32,10 +29,13 @@ class ContactRepository implements IContactRepository {
     return result || null
   }
 
-  async findAll(userId: string): Promise<IContact[]> {
-    const result = await prisma.contact.findMany({
-      where: {
-        userId,
+  async create(data: IContactCreateData): Promise<IContact> {
+    const result = await prisma.contact.create({
+      data: {
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        userId: data.userId,
       },
     })
 

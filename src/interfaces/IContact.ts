@@ -21,9 +21,9 @@ export interface IContactCreateData {
 }
 
 export interface IContactRepository {
-  create({ name, email, phone, userId }: IContactCreateData): Promise<IContact>
+  getAll(userId: string): Promise<IContact[]>
   findByEmailOrPhone(email: string, phone: string): Promise<IContact | null>
-  findAll(userId: string): Promise<IContact[]>
+  create({ name, email, phone, userId }: IContactCreateData): Promise<IContact>
   update({ id, name, email, phone }: IContact): Promise<IContact>
   delete(id: string): Promise<boolean>
 }

@@ -8,6 +8,16 @@ class UserRepository implements IUserRepository {
     return result
   }
 
+  async findByEmail(email: string): Promise<IUser | null> {
+    const result = await prisma.user.findFirst({
+      where: {
+        email,
+      }
+    })
+
+    return result || null
+  }
+
   async create(data: IUserCreate): Promise<IUser> {
     const result = await prisma.user.create({
       data: {
@@ -17,16 +27,6 @@ class UserRepository implements IUserRepository {
     })
 
     return result
-  }
-
-  async findByEmail(email: string): Promise<IUser | null> {
-    const result = await prisma.user.findFirst({
-      where: {
-        email,
-      }
-    })
-
-    return result || null
   }
 }
 

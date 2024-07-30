@@ -12,6 +12,18 @@ class ContactService {
     this.userRepository = new UserRepository()
   }
 
+  async getAll(userEmail: string): Promise<IContact[]> {
+    const user = await this.userRepository.findByEmail(userEmail)
+
+    if (!user) {
+      throw new Error('User not found!')
+    }
+
+    const result = await this.contactRepository.getAll(user.id)
+
+    return result
+  }
+
   async create({ name, email, phone, userEmail }: IContactCreate): Promise<IContact> {
     const user = await this.userRepository.findByEmail(userEmail)
 
@@ -31,18 +43,6 @@ class ContactService {
       phone,
       userId: user.id,
     })
-
-    return result
-  }
-
-  async listAll(userEmail: string): Promise<IContact[]> {
-    const user = await this.userRepository.findByEmail(userEmail)
-
-    if (!user) {
-      throw new Error('User not found!')
-    }
-
-    const result = await this.contactRepository.findAll(user.id)
 
     return result
   }
