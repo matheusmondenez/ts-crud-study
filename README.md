@@ -2,11 +2,9 @@
 
 A simple CRUD with TypeScript, Fastify and Prisma for study purposes.
 
-<div style="display: flex; flex-direction: row;">
+<div style="display: flex; flex-direction: row; gap: 20px;">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" alt="TypeScript Logo" style="height: 70px; width:70px;" />
-  <div style="display: flex; flex-direction: row; width: 20px;"></div>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastify/fastify-plain.svg" alt=" Fastify Logo" style="height: 70px; width:70px;" />
-  <div style="display: flex; flex-direction: row; width: 20px;"></div>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg" alt="Prisma Logo" style="height: 70px; width:70px;" />
 </div>
 
