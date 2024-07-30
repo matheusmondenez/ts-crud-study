@@ -5,10 +5,9 @@ import { UserUseCase } from '../usecases/UserUseCase.ts'
 export async function userRoutes(fastify: FastifyInstance) {
   const userUseCase = new UserUseCase()
 
-  fastify.post<{ Body: IUserCreate }>('/', async (req, reply) => {
+  fastify.get('/', async (req, reply) => {
     try {
-      const { name, email } = req.body
-      const data = await userUseCase.create({name, email})
+      const data = await userUseCase.getAll()
 
       return reply.send(data)
     } catch (e) {
@@ -16,9 +15,12 @@ export async function userRoutes(fastify: FastifyInstance) {
     }
   })
 
-  fastify.get('/', (req, reply) => {
+  fastify.post<{ Body: IUserCreate }>('/', async (req, reply) => {
     try {
+      const { name, email } = req.body
+      const data = await userUseCase.create({name, email})
 
+      return reply.send(data)
     } catch (e) {
       reply.send(e)
     }

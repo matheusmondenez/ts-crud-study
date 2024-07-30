@@ -8,6 +8,12 @@ class UserUseCase {
     this.userRepository = new UserRepository()
   }
 
+  async getAll(): Promise<IUser[]> {
+    const result = await this.userRepository.getAll()
+
+    return result
+  }
+
   async create({ name, email }: IUserCreate): Promise<IUser> {
     const verifyIfUserExists = await this.userRepository.findByEmail(email)
 
