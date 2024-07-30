@@ -1,10 +1,10 @@
 import { FastifyInstance } from 'fastify'
 import { auth } from '../middlewares/auth.ts'
 import { IContact, IContactCreate } from '../interfaces/IContact.ts'
-import { ContactUseCase } from '../usecases/ContactUseCase.ts'
+import { ContactService } from '../services/ContactService.ts'
 
 export async function contactRoutes(fastify: FastifyInstance) {
-  const contactUseCase = new ContactUseCase()
+  const contactService = new ContactService()
 
   fastify.addHook('preHandler', auth)
 
@@ -13,7 +13,7 @@ export async function contactRoutes(fastify: FastifyInstance) {
     const userEmail = req.headers['email']
 
     try {
-      const data = await contactUseCase.create({name, email, phone, userEmail})
+      const data = await contactService.create({name, email, phone, userEmail})
 
       return reply.send(data)
     } catch (e) {
@@ -25,7 +25,7 @@ export async function contactRoutes(fastify: FastifyInstance) {
     const userEmail = req.headers['email']
 
     try {
-      const data = await contactUseCase.listAll(userEmail)
+      const data = await contactService.listAll(userEmail)
 
       return reply.send(data)
     } catch (e) {
@@ -38,7 +38,7 @@ export async function contactRoutes(fastify: FastifyInstance) {
     const { email, name, phone } = req.body
 
     try {
-      const data = await contactUseCase.update({id, name, email, phone})
+      const data = await contactService.update({id, name, email, phone})
 
       return reply.send(data)
     } catch (e) {
@@ -50,7 +50,7 @@ export async function contactRoutes(fastify: FastifyInstance) {
     const { id } = req.params
 
     try {
-      const data = await contactUseCase.delete(id)
+      const data = await contactService.delete(id)
 
       return reply.send(data)
     } catch (e) {
